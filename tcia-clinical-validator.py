@@ -16,7 +16,7 @@ required_columns = ['Project Short Name', 'Case ID']
 # This list is used for column mapping and renaming.
 allowable_columns = [
     'Project Short Name', 'Case ID', 'Race', 'Ethnicity', 'Sex at Birth',
-    'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery','Age UOM',
+    'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery','Age UOM', 'Age at Imaging',
     'Primary Diagnosis', 'Primary Site'
 ]
 
