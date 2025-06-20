@@ -137,7 +137,8 @@ def convert_to_strings(df):
     Converts all DataFrame columns to string type, except for specified age columns.
     This ensures consistent handling of categorical/text data.
     """
-    age_columns = ['Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Earliest Imaging']
+    # Need to figure out if the Age of Earliest Imaging and Age of Imaging are the samething
+    age_columns = ['Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Earliest Imaging', 'Age at Imaging'] # <--- 'Age at Imaging' added here for proper numeric handling later
     for col in df.columns:
         if col not in age_columns:
             df[col] = df[col].astype(str) # Convert to string
@@ -347,6 +348,53 @@ def get_prioritized_options(value, valid_options, n_suggestions=5):
     # Construct the final list: 'Keep current value' always first, then top matches, then the rest
     return ['Keep current value'] + top_matches + remaining_options
 
+
+# -- Def for age at imaging --
+# convert_age_at_imaging_to_years function (Your newly added function):
+# This is the dedicated function for handling the Age at Imaging column,
+# specifically converting it to years based on the Age UOM.
+# Example code to work with -- >
+
+# Converts the 'Age at Imaging' column to years based on the 'Age UOM' column.
+    # If 'Age at Imaging' or 'Age UOM' is missing, it will add a placeholder column
+    # and report the conversion or lack thereof. This function standardizes
+    # age information for consistency.
+# def convert_age_at_imaging_to_years(df):
+
+# Pseudocode pt1:
+    # IF 'Age at Imaging' NOT IN df.COLUMNS:
+    #     ADD NEW COLUMN 'Age at Imaging in Years' to df, fill with NaN
+    #     ADD "No 'Age at Imaging' column found. 'Age at Imaging in Years' column added with NaN values." TO conversion_report
+    #     RETURN df, conversion_report
+
+# Pseudocode pt2:
+    # IF 'Age UOM' NOT IN df.COLUMNS:
+    #     ADD NEW COLUMN 'Age at Imaging in Years' to df, fill with NaN
+    #     ADD "Missing 'Age UOM' column. Cannot convert 'Age at Imaging' to years. 'Age at Imaging in Years' column added with NaN values." TO conversion_report
+    #     RETURN df, conversion_report
+    # ADD NEW COLUMN 'Age at Imaging in Years' to df, fill with NaN
+
+# Pseudocode pt3:
+    # FOR EACH index, row IN df:
+    #     SET age_at_imaging_val = CONVERT row['Age at Imaging'] TO NUMERIC (handle errors by making NaN)
+    #     SET age_uom_val = TRIM(CONVERT row['Age UOM'] TO STRING)
+    #
+    #     IF age_at_imaging_val IS NOT NaN AND age_uom_val IS IN age_uom_factors (global mapping):
+    #         SET df.AT[index, 'Age at Imaging in Years'] = age_at_imaging_val * age_uom_factors[age_uom_val]
+    #     ELSE:
+    #         IF age_at_imaging_val IS NaN:
+    #             ADD "Row {index}: 'Age at Imaging' value '{row['Age at Imaging']}' is not numeric. Cannot convert to years." TO conversion_report
+    #         ELSE IF age_uom_val NOT IN age_uom_factors:
+    #             ADD "Row {index}: 'Age UOM' value '{row['Age UOM']}' is invalid. Cannot convert 'Age at Imaging' to years." TO conversion_report
+    #         ELSE:
+    #             ADD "Row {index}: Missing or invalid 'Age at Imaging' or 'Age UOM' value. Cannot convert to years." TO conversion_report
+# Pseudocode pt4:
+    # IF conversion_report IS EMPTY:
+    #     ADD "Successfully converted 'Age at Imaging' to 'Age at Imaging in Years'." TO conversion_report
+    # RETURN df, conversion_report
+
+# So far everything works with just 'Age at Imaging' when testing the dataset.
+
 def reorder_columns(df):
     """
     Reorders the DataFrame columns into a preferred standard order for TCIA.
@@ -357,6 +405,9 @@ def reorder_columns(df):
         'Race', 'Ethnicity', 'Sex at Birth', 'Age UOM', 'Age at Imaging',
         'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Earliest Imaging'
     ]
+
+    # What is Age at Earliest Imaging! -ML
+
     # Filter preferred_order to include only columns actually present in the DataFrame
     existing_columns = [col for col in preferred_order if col in df.columns]
     # Get any other columns not in the preferred list
