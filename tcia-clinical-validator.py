@@ -354,7 +354,7 @@ def reorder_columns(df):
     """
     preferred_order = [
         'Project Short Name', 'Case ID', 'Primary Diagnosis', 'Primary Site',
-        'Race', 'Ethnicity', 'Sex at Birth', 'Age UOM',
+        'Race', 'Ethnicity', 'Sex at Birth', 'Age UOM', 'Age at Imaging',
         'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Earliest Imaging'
     ]
     # Filter preferred_order to include only columns actually present in the DataFrame
