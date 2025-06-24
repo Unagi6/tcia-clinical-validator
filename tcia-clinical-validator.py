@@ -138,7 +138,7 @@ def convert_to_strings(df):
     This ensures consistent handling of categorical/text data.
     """
     # Need to figure out if the Age of Earliest Imaging and Age of Imaging are the samething
-    age_columns = ['Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Earliest Imaging', 'Age at Imaging'] # <--- 'Age at Imaging' added here for proper numeric handling later
+    age_columns = ['Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Imaging'] # <--- 'Age at Imaging' added here for proper numeric handling later
     for col in df.columns:
         if col not in age_columns:
             df[col] = df[col].astype(str) # Convert to string
@@ -403,7 +403,7 @@ def reorder_columns(df):
     preferred_order = [
         'Project Short Name', 'Case ID', 'Primary Diagnosis', 'Primary Site',
         'Race', 'Ethnicity', 'Sex at Birth', 'Age UOM', 'Age at Imaging',
-        'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Earliest Imaging'
+        'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery'
     ]
 
     # What is Age at Earliest Imaging! -ML
@@ -662,7 +662,7 @@ elif st.session_state.step == 3:
     missing_project_short_name = 'Project Short Name' not in df.columns
 
     # Check for age columns and Age UOM
-    age_columns = ['Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Earliest Imaging']
+    age_columns = ['Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery', 'Age at Imaging']
     existing_age_columns = [col for col in age_columns if col in df.columns]
     missing_age_uom = 'Age UOM' not in df.columns and existing_age_columns # UOM required if any age column exists
 
@@ -822,7 +822,7 @@ elif st.session_state.step == 4:
 
     # 3. Validate numeric columns (Age columns)
     numeric_columns = ['Age at Diagnosis', 'Age at Enrollment',
-                       'Age at Surgery', 'Age at Earliest Imaging']
+                       'Age at Surgery', 'Age at Imaging']
 
     # Only validate numeric columns if not currently applying corrections (to prevent infinite loops)
     if 'applying_corrections' not in st.session_state:
