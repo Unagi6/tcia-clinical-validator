@@ -115,3 +115,8 @@ You may choose the Data Entry to fit the reading of the data but after uploading
 Each Column editing can be modified with the proper tools, each column presented to change has the same labels:
 
 <img width="791" alt="Screenshot 2025-06-27 at 9 07 57 AM" src="https://github.com/user-attachments/assets/e38268c2-e1be-4975-b8ef-f8cedefd917d" />
+
+Once finished with applying the proper mapping, will be brought to the confermation page of the changes being made to the clinical file:
+
+![image](https://github.com/user-attachments/assets/a4f59232-3633-4746-8bde-4320ebe706d3)
+
