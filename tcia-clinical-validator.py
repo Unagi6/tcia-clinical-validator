@@ -303,7 +303,11 @@ def get_prioritized_options(value, valid_options, n_suggestions=5):
     # Construct final list with 'Keep current value' first, then top matches, then remaining options
     return ['Keep current value'] + top_matches + remaining_options
 
+<<<<<<< Updated upstream
 # Function to reorder columns
+=======
+
+>>>>>>> Stashed changes
 def reorder_columns(df):
     preferred_order = [
         'Project Short Name', 'Case ID', 'Primary Diagnosis', 'Primary Site',
