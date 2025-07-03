@@ -97,7 +97,15 @@ The validator checks specific columns against predefined permissible values and 
 ## 6. Screenshots of Process
 
 *(image syntax: `![Screenshot Description](path/to/image.png)`)*
+
 *This is being worked on right now.
+
 *First we boot up the app that contains the clinical validation and your screen should look like the screenshot bellow.
+
 (<img width="802" alt="Screenshot 2025-06-27 at 9 06 34 AM" src="https://github.com/user-attachments/assets/79d701b3-3c3f-4011-91eb-f68a7f10fc89" />
+)
+
+At the top bar you may add any clinical file within the xlsx or csv format:
+
+(<img width="802" alt="Screenshot 2025-06-27 at 9 07 04 AM" src="https://github.com/user-attachments/assets/a896aa33-ed0d-4aeb-8c6a-caad963dff05" />
 )
