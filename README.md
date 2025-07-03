@@ -102,8 +102,14 @@ The validator checks specific columns against predefined permissible values and 
 
 First we boot up the app that contains the clinical validation and your screen should look like the screenshot bellow.
 
-(<img width="802" alt="Screenshot 2025-06-27 at 9 06 34 AM" src="https://github.com/user-attachments/assets/79d701b3-3c3f-4011-91eb-f68a7f10fc89" />)
+<img width="802" alt="Screenshot 2025-06-27 at 9 06 34 AM" src="https://github.com/user-attachments/assets/79d701b3-3c3f-4011-91eb-f68a7f10fc89" />
 
 At the top bar you may add any clinical file within the xlsx, csv, or tsv file format:
 
-(<img width="802" alt="Screenshot 2025-06-27 at 9 07 04 AM" src="https://github.com/user-attachments/assets/a896aa33-ed0d-4aeb-8c6a-caad963dff05" />)
+<img width="802" alt="Screenshot 2025-06-27 at 9 07 04 AM" src="https://github.com/user-attachments/assets/a896aa33-ed0d-4aeb-8c6a-caad963dff05" />
+
+You may choose the Data Entry to fit the reading of the data but after uploading the documents you may be brought to this mapping column page:
+
+<img width="771" alt="Screenshot 2025-06-27 at 9 10 47 AM" src="https://github.com/user-attachments/assets/8456c3b8-5c19-4226-b123-afd760e33222" />
+
+You
