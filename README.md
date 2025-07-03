@@ -112,4 +112,6 @@ You may choose the Data Entry to fit the reading of the data but after uploading
 
 <img width="771" alt="Screenshot 2025-06-27 at 9 10 47 AM" src="https://github.com/user-attachments/assets/8456c3b8-5c19-4226-b123-afd760e33222" />
 
-You
+Each Column editing can be modified with the proper tools, each column presented to change has the same labels:
+
+<img width="791" alt="Screenshot 2025-06-27 at 9 07 57 AM" src="https://github.com/user-attachments/assets/e38268c2-e1be-4975-b8ef-f8cedefd917d" />
