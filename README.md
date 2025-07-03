@@ -97,4 +97,4 @@ The validator checks specific columns against predefined permissible values and 
 ## 6. Screenshots of Process
 
 *(image syntax: `![Screenshot Description](path/to/image.png)`)*
-This is being worked on right now.
+*This is being worked on right now.*
