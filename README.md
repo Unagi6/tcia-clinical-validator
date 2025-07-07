@@ -118,5 +118,20 @@ Each Column editing can be modified with the proper tools, each column presented
 
 Once finished with applying the proper mapping, will be brought to the confermation page of the changes being made to the clinical file:
 
-![image](https://github.com/user-attachments/assets/a4f59232-3633-4746-8bde-4320ebe706d3)
+<![image](https://github.com/user-attachments/assets/a4f59232-3633-4746-8bde-4320ebe706d3) />
+
+Some columns within the app need clarificationon what certain data means like data only having for example: M and F for gender, where the app will ask for clarification if M = Male or F = Female.
+
+<img width="739" alt="Screenshot 2025-06-27 at 9 15 43 AM" src="https://github.com/user-attachments/assets/bbea7c0b-dc57-41f9-962a-4c5135f204e2" />
+
+After the process of fixing the data within the columns are done, you will be getting a confermation page of all the changes you made.
+
+<img width="804" alt="Screenshot 2025-06-27 at 9 15 53 AM" src="https://github.com/user-attachments/assets/068cc394-69ef-473e-a730-4bc0bac445c5" />
+
+Now that you reach to the end of the process of mapping your data, you may finally download the clean data that you have made with this app which can be renamed on the app for organization.
+
+<img width="805" alt="Screenshot 2025-06-27 at 9 16 08 AM" src="https://github.com/user-attachments/assets/68b6c9fc-aabf-4bc2-ac22-c23e13670b5e" />
+
+
+
 
