@@ -10,12 +10,12 @@ st.set_page_config(page_title="TCIA Clinical Data Validator")
 
 # --- Global Variables ---
 # Define the core required columns that must be present in the submitted data
-required_columns = ['Project Short Name', 'Case ID']
+required_columns = ['Project Short Name', 'Subject ID']
 
 # Define a comprehensive list of all permissible column names the validator recognizes.
 # This list is used for column mapping and renaming.
 allowable_columns = [
-    'Project Short Name', 'Case ID', 'Race', 'Ethnicity', 'Sex at Birth',
+    'Project Short Name', 'Subject ID', 'Race', 'Ethnicity', 'Sex at Birth',
     'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery','Age UOM', 'Age at Imaging',
     'Primary Diagnosis', 'Primary Site'
 ]
@@ -355,7 +355,7 @@ def reorder_columns(df):
     Columns not in the preferred order are appended at the end.
     """
     preferred_order = [
-        'Project Short Name', 'Case ID', 'Primary Diagnosis', 'Primary Site',
+        'Project Short Name', 'Subject ID', 'Primary Diagnosis', 'Primary Site',
         'Race', 'Ethnicity', 'Sex at Birth', 'Age UOM', 'Age at Imaging',
         'Age at Diagnosis', 'Age at Enrollment', 'Age at Surgery'
     ]
@@ -610,7 +610,7 @@ elif st.session_state.step == 3:
     df = convert_to_strings(df)
 
     # Check for presence of required columns
-    missing_case_id = 'Case ID' not in df.columns
+    missing_case_id = 'Subject ID' not in df.columns
     missing_project_short_name = 'Project Short Name' not in df.columns
 
     # Check for age columns and Age UOM
@@ -619,7 +619,7 @@ elif st.session_state.step == 3:
     missing_age_uom = 'Age UOM' not in df.columns and existing_age_columns # UOM required if any age column exists
 
     if missing_case_id:
-        st.error("The 'Case ID' column is missing from your spreadsheet. This is a required column.")
+        st.error("The 'Subject ID' column is missing from your spreadsheet. This is a required column.")
         if st.button("Restart"): # Option to restart if a critical required column is missing
             st.session_state.step = 1
             if 'df' in st.session_state:
