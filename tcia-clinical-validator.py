@@ -496,6 +496,13 @@ if st.session_state.step == 1:
         st.session_state.df = df
         st.session_state.other_sheets = other_sheets
         st.session_state.step = 2 # Advance to the next step
+        
+        # Step 1.5
+        # Before pressing the 'Next' button Step 1, 
+        # Adding a preview button after user ads file of the document that was added to see what it looks like
+        # This program uses pandas so when the person press 'preview' we use the .head() of the file
+
+        df.head() # This will show the preview of the dataset.
         st.rerun() # Rerun the app to display the next step's UI
 
 # Step 2: Analyze and Map Columns
