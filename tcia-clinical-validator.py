@@ -492,10 +492,10 @@ if st.session_state.step == 1:
     st.success("File imported successfully!")
     df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
-    # Save df temporarily in session_state so it can be reused
-    st.session_state.df_temp = df  # temp var to preview before finalizing
+    # Save temporarily so preview doesn't auto-jump to step 2
+    st.session_state.df_temp = df
 
-    # Buttons side by side
+    # Show Preview and Next buttons side-by-side
     col1, col2 = st.columns([1, 1])
 
     with col1:
@@ -508,7 +508,7 @@ if st.session_state.step == 1:
             st.session_state.df = st.session_state.df_temp
             st.session_state.other_sheets = other_sheets
             st.session_state.step = 2
-            st.rerun()  # Go to next step
+            st.rerun()
 
 
 # Step 2: Analyze and Map Columns
