@@ -490,8 +490,6 @@ if st.session_state.step == 1:
             df, proceed_to_next, other_sheets = process_file(url, is_url=True)
 
     # Check if a DataFrame was successfully loaded.
-    # The 'proceed_to_next' flag is now used to control whether we show the button,
-    # not to automatically advance the step.
     if df is not None and proceed_to_next:
         st.success("File loaded successfully!")
         
@@ -499,9 +497,8 @@ if st.session_state.step == 1:
         with st.expander("Preview Data"):
             st.dataframe(df.head())
 
-        # Now, place the "Next step" button here.
-        # Clicking this button will trigger the state change to Step 2.
-        if st.button("Confirm and go to Step 2"):
+        # This button will trigger the state to Step 2.
+        if st.button("Next to Step 2"):
             # This code only runs when the button is clicked.
             
             # Remove leading and trailing spaces from all string values in the DataFrame
