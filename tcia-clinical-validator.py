@@ -499,8 +499,6 @@ if st.session_state.step == 1:
 
         # This button will trigger the state to Step 2.
         if st.button("Next to Step 2"):
-            # This code only runs when the button is clicked.
-            
             # Remove leading and trailing spaces from all string values in the DataFrame
             df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
             # Store the processed DataFrame and other sheets in session state
