@@ -500,13 +500,14 @@ if st.session_state.step == 1:
         # Show buttons: Preview and Next
         col1, col2 = st.columns([1, 1])
 
+        # Each button is now uniquely identified in the Streamlit app by the key.
         with col1:
-            if st.button("Preview Data"):
+            if st.button("Preview Data", key="preview_button"):
                 st.subheader("Data Preview (first 5 rows):")
                 st.dataframe(df.head())
 
         with col2:
-            if st.button("Next"):
+            if st.button("Next", key="next_button_step1"):
                 # Save to permanent session state and advance
                 st.session_state.df = st.session_state.df_temp
                 st.session_state.other_sheets = st.session_state.other_sheets_temp
