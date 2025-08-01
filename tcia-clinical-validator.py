@@ -475,8 +475,7 @@ if st.session_state.step == 1:
     # File uploader widget for user to upload a file
     uploaded_file = st.file_uploader("Upload your file", type=["csv", "xlsx", "tsv"])
 
-    # Initialize df and related flags
-    df = None 
+    df = None # Initialize df to None for scope if no file is uploaded
     proceed_to_next = False
     other_sheets = None
 
@@ -490,20 +489,21 @@ if st.session_state.step == 1:
             # Process file from URL
             df, proceed_to_next, other_sheets = process_file(url, is_url=True)
 
-    # If a DataFrame is successfully loaded, display the preview and the 'Next' button
-    if df is not None:
+    # Check if a DataFrame was successfully loaded.
+    # The 'proceed_to_next' flag is now used to control whether we show the button,
+    # not to automatically advance the step.
+    if df is not None and proceed_to_next:
         st.success("File loaded successfully!")
         
-        # Step 1.5: Show data preview
-        st.subheader("Data Preview (first 5 rows):")
-        st.dataframe(df.head())
+        # Step 1.5: Show data preview in a collapsible expander
+        with st.expander("Preview Data"):
+            st.dataframe(df.head())
 
-
-        # Place button here, works just like process_file
-        # Button to advance to the next step
-        if st.button("Next step"):
-            # This code only runs when the button is clicked
-
+        # Now, place the "Next step" button here.
+        # Clicking this button will trigger the state change to Step 2.
+        if st.button("Confirm and go to Step 2"):
+            # This code only runs when the button is clicked.
+            
             # Remove leading and trailing spaces from all string values in the DataFrame
             df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
             # Store the processed DataFrame and other sheets in session state
