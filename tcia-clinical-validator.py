@@ -515,7 +515,7 @@ if st.session_state.step == 1:
                 st.session_state.df.reset_index(drop=True, inplace=True)
                 st.session_state.df.columns = [str(col) for col in st.session_state.df.columns]
                 st.success("The column headers are now fixed.")
-                st.experimental_rerun() # Rerun to display the new fixed data
+                st.rerun() # Rerun to display the new fixed data
 
         # Now, check if the DataFrame has been fixed to display the preview
         if 'df' in st.session_state and empty_column and 'The column headers are now fixed.' in st.session_state:
@@ -523,11 +523,14 @@ if st.session_state.step == 1:
                 st.dataframe(st.session_state.df.head())
 
         # The 'Next to Step 2' button should also use the DataFrame from session state
-        if st.button("Next to Step 2"):
+         if st.button("Next to Step 2"):
             # Remove leading and trailing spaces from all string values in the DataFrame
-            st.session_state.df = st.session_state.df.map(lambda x: x.strip() if isinstance(x, str) else x)
-            st.session_state.step = 2
-            st.experimental_rerun()
+            df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
+            # Store the processed DataFrame and other sheets in session state
+            st.session_state.df = df
+            st.session_state.other_sheets = other_sheets
+            st.session_state.step = 2 # Advance to the next step
+            st.rerun() # Rerun the app to display the next step's UI
 
 
 # Step 2: Analyze and Map Columns
