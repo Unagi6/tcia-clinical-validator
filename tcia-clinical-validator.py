@@ -497,6 +497,27 @@ if st.session_state.step == 1:
         with st.expander("Preview Data"):
             st.dataframe(df.head())
 
+        # Step 1.5.5 Detect the data if it has any unknown columns such as 'Unamed: ^'
+        empty_column = [col for col in df.columns if str(col).strip().lower().startswith('unamed')] # Make the seach lowercase to find problem
+        if empty_column:
+            st.warning("We detect that your data is missing column names.")
+
+            if st.button("Header Fix?"): 
+                # Use first row to replace the Headers.
+                new_head = df.iloc[0] 
+                df = df[1:]             # This removes old header from data
+                df.columns = new_head   # This sets new header for data
+
+                # Convert headers to string incase headers are numerical
+                df.reset_index(drop=True, inplace=True)
+                df.columns = [str(col) for col in df.columns]
+
+                # Create the Sucess message
+                st.success("The column headers are now fixed.")
+
+                with st.expander("Fixed Column Headers"): # Borrow the code from Step 1.5 as collapsible expander
+                    st.dataframe(df.head())
+
         # This button will trigger the state to Step 2.
         if st.button("Next to Step 2"):
             # Remove leading and trailing spaces from all string values in the DataFrame
