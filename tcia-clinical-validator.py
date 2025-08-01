@@ -498,25 +498,19 @@ if st.session_state.step == 1:
         st.subheader("Data Preview (first 5 rows):")
         st.dataframe(df.head())
 
-        # Remove leading and trailing spaces from all string values in the DataFrame
-        df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
-        # Store the processed DataFrame and other sheets in session state
-        st.session_state.df = df
-        st.session_state.other_sheets = other_sheets
-        st.session_state.step = 2 # Advance to the next step
-        st.rerun() # Rerun the app to display the next step's UI
-        
+
+        # Place button here, works just like process_file
         # Button to advance to the next step
-        #if st.button("Next step"):
+        if st.button("Next step"):
             # This code only runs when the button is clicked
 
             # Remove leading and trailing spaces from all string values in the DataFrame
-            #df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
+            df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
             # Store the processed DataFrame and other sheets in session state
-            #st.session_state.df = df
-            #st.session_state.other_sheets = other_sheets
-            #st.session_state.step = 2 # Advance to the next step
-            #st.rerun() # Rerun the app to display the next step's UI
+            st.session_state.df = df
+            st.session_state.other_sheets = other_sheets
+            st.session_state.step = 2 # Advance to the next step
+            st.rerun() # Rerun the app to display the next step's UI
 
 
 # Step 2: Analyze and Map Columns
