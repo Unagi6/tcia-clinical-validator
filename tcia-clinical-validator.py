@@ -500,10 +500,10 @@ if st.session_state.step == 1:
         # Show buttons: Preview and Next
         col1, col2 = st.columns([1, 1])
 
-        # Each button is now uniquely identified in the Streamlit app by the key.
         with col1:
             if st.button("Preview Data", key="preview_button"):
-                st.session_state.preview_requested = True # Show preview flag
+                st.subheader("Data Preview (first 5 rows):")
+                st.dataframe(df.head())
 
         with col2:
             if st.button("Next", key="next_button_step1"):
@@ -516,10 +516,7 @@ if st.session_state.step == 1:
     # Step 1.5 
     # Adding a preview button after user adds file of the document that was added to see what it looks like
     # This program uses pandas so when the person press 'preview' we use the .head() of the file
-        # Show preview only if the flag is set
-        if st.session_state.get("preview_requested", False):
-            st.subheader("Data Preview (first 5 rows):")
-            st.dataframe(df.head())
+
 
 # Step 2: Analyze and Map Columns
 elif st.session_state.step == 2:
