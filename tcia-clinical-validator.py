@@ -518,16 +518,15 @@ if st.session_state.step == 1:
                 with st.expander("Fixed Column Headers"): # Borrow the code from Step 1.5 as collapsible expander
                     st.dataframe(df.head())
 
-        else:
-            # This button will trigger the state to Step 2.
-            if st.button("Next to Step 2"):
-                # Remove leading and trailing spaces from all string values in the DataFrame
-                df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
-                # Store the processed DataFrame and other sheets in session state
-                st.session_state.df = df
-                st.session_state.other_sheets = other_sheets
-                st.session_state.step = 2 # Advance to the next step
-                st.rerun() # Rerun the app to display the next step's UI
+        # This button will trigger the state to Step 2.
+        if st.button("Next to Step 2"):
+            # Remove leading and trailing spaces from all string values in the DataFrame
+            df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
+            # Store the processed DataFrame and other sheets in session state
+            st.session_state.df = df
+            st.session_state.other_sheets = other_sheets
+            st.session_state.step = 2 # Advance to the next step
+            st.rerun() # Rerun the app to display the next step's UI
 
 
 # Step 2: Analyze and Map Columns
