@@ -493,25 +493,29 @@ if st.session_state.step == 1:
         st.success("File imported successfully!")
         df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
-        # Store in temporary session state to allow previewing before advancing
         st.session_state.df_temp = df
         st.session_state.other_sheets_temp = other_sheets
 
-        # Show buttons: Preview and Next
         col1, col2 = st.columns([1, 1])
 
         with col1:
-            if st.button("Preview Data", key="preview_button"):
-                st.subheader("Data Preview (first 5 rows):")
-                st.dataframe(df.head())
+            # PREVIEW button logic
+            if st.button("Preview Data"):
+                st.session_state.preview_requested = True
 
         with col2:
-            if st.button("Next", key="next_button_step1"):
-                # Save to permanent session state and advance
+            # NEXT button logic
+            if st.button("Next"):
                 st.session_state.df = st.session_state.df_temp
                 st.session_state.other_sheets = st.session_state.other_sheets_temp
                 st.session_state.step = 2
+                st.session_state.preview_requested = False
                 st.rerun()
+
+        # Show preview if user clicked "Preview Data"
+        if st.session_state.preview_requested:
+            st.subheader("Data Preview (first 5 rows):")
+            st.dataframe(st.session_state.df_temp.head())
 
     # Step 1.5 
     # Adding a preview button after user adds file of the document that was added to see what it looks like
