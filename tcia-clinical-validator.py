@@ -485,7 +485,7 @@ if st.session_state.step == 1:
         url = st.text_input("...or provide the URL of the file")
         if url:
             # Process file from URL
-            df, other_sheets = process_file(url, is_url=True)
+            df, proceed_to_next, other_sheets = process_file(url, is_url=True)
 
     # If a DataFrame is successfully loaded and the 'proceed_to_next' flag is True
     # (Simplified) If the file is valid
