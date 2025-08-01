@@ -519,7 +519,7 @@ if st.session_state.step == 1:
 
         # Now, check if the DataFrame has been fixed to display the preview
         if 'df' in st.session_state and empty_column and 'The column headers are now fixed.' in st.session_state:
-            with st.expander("Fixed Column Headers"):
+            with st.expander("Fixed Column Headers"):    # Note: This combines with Preview Data but it still works.
                 st.dataframe(st.session_state.df.head())
 
         # The 'Next to Step 2' button should also use the DataFrame from session state
