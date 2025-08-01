@@ -468,27 +468,22 @@ if 'other_sheets' not in st.session_state:
 # --- Application Steps (Conditional Rendering based on st.session_state.step) ---
 
 # Step 1: File Upload and Import
+# Step 1: File Upload and Import
 if st.session_state.step == 1:
     st.subheader("Step 1: Upload your CSV, XLSX, or TSV file")
-    # File uploader widget for user to upload a file
     uploaded_file = st.file_uploader("Upload your file", type=["csv", "xlsx", "tsv"])
 
-    df = None # Initialize df to None for scope if no file is uploaded
+    df = None
     proceed_to_next = False
     other_sheets = None
 
     if uploaded_file:
-        # Process the uploaded file
         df, proceed_to_next, other_sheets = process_file(uploaded_file)
     else:
-        # Alternative input: URL for the file
         url = st.text_input("...or provide the URL of the file")
         if url:
-            # Process file from URL
             df, proceed_to_next, other_sheets = process_file(url, is_url=True)
 
-    # If a DataFrame is successfully loaded and the 'proceed_to_next' flag is True
-    # (Simplified) If the file is valid
     if 'df' in locals() and df is not None and proceed_to_next:
         st.success("File imported successfully!")
         df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
