@@ -487,23 +487,36 @@ if st.session_state.step == 1:
             # Process file from URL
             df, proceed_to_next, other_sheets = process_file(url, is_url=True)
 
-    # Step 1.5
-    # Before pressing the 'Next' button Step 1, 
-    # Adding a preview button after user ads file of the document that was added to see what it looks like
-    # This program uses pandas so when the person press 'preview' we use the .head() of the file
-
-    df.head() # This will show the preview of the dataset.
-
     # If a DataFrame is successfully loaded and the 'proceed_to_next' flag is True
+    # (Simplified) If the file is valid
     if 'df' in locals() and df is not None and proceed_to_next:
         st.success("File imported successfully!")
-        # Remove leading and trailing spaces from all string values in the DataFrame
         df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
-        # Store the processed DataFrame and other sheets in session state
-        st.session_state.df = df
-        st.session_state.other_sheets = other_sheets
-        st.session_state.step = 2 # Advance to the next step
-        st.rerun() # Rerun the app to display the next step's UI
+
+        # Store in temporary session state to allow previewing before advancing
+        st.session_state.df_temp = df
+        st.session_state.other_sheets_temp = other_sheets
+
+        # Show buttons: Preview and Next
+        col1, col2 = st.columns([1, 1])
+
+        with col1:
+            if st.button("Preview Data"):
+                st.subheader("Data Preview (first 5 rows):")
+                st.dataframe(df.head())
+
+        with col2:
+            if st.button("Next"):
+                # Save to permanent session state and advance
+                st.session_state.df = st.session_state.df_temp
+                st.session_state.other_sheets = st.session_state.other_sheets_temp
+                st.session_state.step = 2
+                st.rerun()
+
+    # Step 1.5 
+    # Adding a preview button after user adds file of the document that was added to see what it looks like
+    # This program uses pandas so when the person press 'preview' we use the .head() of the file
+
 
 # Step 2: Analyze and Map Columns
 elif st.session_state.step == 2:
