@@ -490,6 +490,14 @@ if st.session_state.step == 1:
     # If a DataFrame is successfully loaded and the 'proceed_to_next' flag is True
     if 'df' in locals() and df is not None and proceed_to_next:
         st.success("File imported successfully!")
+        
+        # Step 1.5
+        # Before pressing the 'Next' button Step 1 after the upload, the data should preview the data based off .head() 
+        # Adding a preview button after user adds file of the document that was added to see what it looks like
+        # This program uses pandas so when the person press 'preview' we use the .head() of the file
+        st.subheader("Data Preview (first 5 rows):")
+        st.dataframe(df.head())
+
         # Remove leading and trailing spaces from all string values in the DataFrame
         df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
         # Store the processed DataFrame and other sheets in session state
@@ -497,11 +505,6 @@ if st.session_state.step == 1:
         st.session_state.other_sheets = other_sheets
         st.session_state.step = 2 # Advance to the next step
         st.rerun() # Rerun the app to display the next step's UI
-
-    # Step 1.5
-    # Before pressing the 'Next' button Step 1, 
-    # Adding a preview button after user adds file of the document that was added to see what it looks like
-    # This program uses pandas so when the person press 'preview' we use the .head() of the file
 
 
 # Step 2: Analyze and Map Columns
