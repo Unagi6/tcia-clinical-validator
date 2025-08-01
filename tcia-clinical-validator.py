@@ -409,7 +409,7 @@ def process_file(file_or_url, is_url=False):
                 # A button is required to proceed when a sheet is selected in multi-sheet files
                 
                 # Removed for testing button 'Next Step' in Step 1
-                # proceed_to_next = st.button("Next")
+                proceed_to_next = st.button("Next")
             else:
                 # If only one sheet, read it directly and proceed automatically
                 df = pd.read_excel(file_or_url)
@@ -497,18 +497,26 @@ if st.session_state.step == 1:
         # Step 1.5: Show data preview
         st.subheader("Data Preview (first 5 rows):")
         st.dataframe(df.head())
+
+        # Remove leading and trailing spaces from all string values in the DataFrame
+        df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
+        # Store the processed DataFrame and other sheets in session state
+        st.session_state.df = df
+        st.session_state.other_sheets = other_sheets
+        st.session_state.step = 2 # Advance to the next step
+        st.rerun() # Rerun the app to display the next step's UI
         
         # Button to advance to the next step
-        if st.button("Next step"):
+        #if st.button("Next step"):
             # This code only runs when the button is clicked
 
             # Remove leading and trailing spaces from all string values in the DataFrame
-            df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
+            #df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
             # Store the processed DataFrame and other sheets in session state
-            st.session_state.df = df
-            st.session_state.other_sheets = other_sheets
-            st.session_state.step = 2 # Advance to the next step
-            st.rerun() # Rerun the app to display the next step's UI
+            #st.session_state.df = df
+            #st.session_state.other_sheets = other_sheets
+            #st.session_state.step = 2 # Advance to the next step
+            #st.rerun() # Rerun the app to display the next step's UI
 
 
 # Step 2: Analyze and Map Columns
