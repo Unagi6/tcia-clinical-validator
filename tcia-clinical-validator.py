@@ -472,25 +472,27 @@ if 'other_sheets' not in st.session_state:
 # Step 1: File Upload and Import
 if st.session_state.step == 1:
     st.subheader("Step 1: Upload your CSV, XLSX, or TSV file")
-    # File uploader widget for user to upload a file
     uploaded_file = st.file_uploader("Upload your file", type=["csv", "xlsx", "tsv"])
 
-    df = None # Initialize df to None for scope if no file is uploaded
+    df = None
     proceed_to_next = False
     other_sheets = None
 
     if uploaded_file:
-        # Process the uploaded file
         df, proceed_to_next, other_sheets = process_file(uploaded_file)
     else:
-        # Alternative input: URL for the file
         url = st.text_input("...or provide the URL of the file")
         if url:
-            # Process file from URL
             df, proceed_to_next, other_sheets = process_file(url, is_url=True)
 
-    # Check if a DataFrame was successfully loaded.
-    if df is not None and proceed_to_next:
+    # Store the initial DataFrame in session state if it's the first time
+    if df is not None and proceed_to_next and 'df' not in st.session_state:
+        st.session_state.df = df
+        st.session_state.other_sheets = other_sheets
+
+    # Use the DataFrame from session state for all subsequent operations in this step
+    if 'df' in st.session_state:
+        df = st.session_state.df
         st.success("File loaded successfully!")
         
         # Step 1.5: Show data preview in a collapsible expander
@@ -498,35 +500,34 @@ if st.session_state.step == 1:
             st.dataframe(df.head())
 
         # Step 1.5.5 Detect the data if it has any unknown columns such as 'Unamed: ^'
-        empty_column = [col for col in df.columns if str(col).strip().lower().startswith('unamed')] # Make the seach lowercase to find problem
+        empty_column = [col for col in df.columns if str(col).strip().lower().startswith('unnamed')]
         if empty_column:
             st.warning("We detect that your data is missing column names.")
 
-            if st.button("Header Fix?"): 
+            # Display the "Header Fix?" button only if it hasn't been clicked yet
+            if st.button("Header Fix?"):
                 # Use first row to replace the Headers.
-                new_head = df.iloc[0] 
-                df = df[1:]             # This removes old header from data
-                df.columns = new_head   # This sets new header for data
-
+                new_head = df.iloc[0]
+                # This removes old header from data and updates the DataFrame in session state
+                st.session_state.df = df[1:]
+                st.session_state.df.columns = new_head
                 # Convert headers to string incase headers are numerical
-                df.reset_index(drop=True, inplace=True)
-                df.columns = [str(col) for col in df.columns]
-
-                # Create the Sucess message
+                st.session_state.df.reset_index(drop=True, inplace=True)
+                st.session_state.df.columns = [str(col) for col in st.session_state.df.columns]
                 st.success("The column headers are now fixed.")
+                st.experimental_rerun() # Rerun to display the new fixed data
 
-                with st.expander("Fixed Column Headers"): # Borrow the code from Step 1.5 as collapsible expander
-                    st.dataframe(df.head())
+        # Now, check if the DataFrame has been fixed to display the preview
+        if 'df' in st.session_state and empty_column and 'The column headers are now fixed.' in st.session_state:
+            with st.expander("Fixed Column Headers"):
+                st.dataframe(st.session_state.df.head())
 
-        # This button will trigger the state to Step 2.
+        # The 'Next to Step 2' button should also use the DataFrame from session state
         if st.button("Next to Step 2"):
             # Remove leading and trailing spaces from all string values in the DataFrame
-            df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
-            # Store the processed DataFrame and other sheets in session state
-            st.session_state.df = df
-            st.session_state.other_sheets = other_sheets
-            st.session_state.step = 2 # Advance to the next step
-            st.rerun() # Rerun the app to display the next step's UI
+            st.session_state.df = st.session_state.df.map(lambda x: x.strip() if isinstance(x, str) else x)
+            st.session_state.step = 2
+            st.experimental_rerun()
 
 
 # Step 2: Analyze and Map Columns
