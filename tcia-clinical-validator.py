@@ -407,7 +407,9 @@ def process_file(file_or_url, is_url=False):
                         other_sheets[sheet] = pd.read_excel(file_or_url, sheet_name=sheet)
 
                 # A button is required to proceed when a sheet is selected in multi-sheet files
-                proceed_to_next = st.button("Next")
+                
+                # Removed for testing button 'Next Step' in Step 1
+                # proceed_to_next = st.button("Next")
             else:
                 # If only one sheet, read it directly and proceed automatically
                 df = pd.read_excel(file_or_url)
@@ -499,7 +501,7 @@ if st.session_state.step == 1:
         # Button to advance to the next step
         if st.button("Next step"):
             # This code only runs when the button is clicked
-            
+
             # Remove leading and trailing spaces from all string values in the DataFrame
             df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
             # Store the processed DataFrame and other sheets in session state
