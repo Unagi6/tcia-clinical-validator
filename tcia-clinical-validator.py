@@ -473,7 +473,8 @@ if st.session_state.step == 1:
     # File uploader widget for user to upload a file
     uploaded_file = st.file_uploader("Upload your file", type=["csv", "xlsx", "tsv"])
 
-    df = None # Initialize df to None for scope if no file is uploaded
+    # Initialize df and related flags
+    df = None 
     proceed_to_next = False
     other_sheets = None
 
@@ -487,24 +488,25 @@ if st.session_state.step == 1:
             # Process file from URL
             df, proceed_to_next, other_sheets = process_file(url, is_url=True)
 
-    # If a DataFrame is successfully loaded and the 'proceed_to_next' flag is True
-    if 'df' in locals() and df is not None and proceed_to_next:
-        st.success("File imported successfully!")
+    # If a DataFrame is successfully loaded, display the preview and the 'Next' button
+    if df is not None:
+        st.success("File loaded successfully!")
         
-        # Step 1.5
-        # Before pressing the 'Next' button Step 1 after the upload, the data should preview the data based off .head() 
-        # Adding a preview button after user adds file of the document that was added to see what it looks like
-        # This program uses pandas so when the person press 'preview' we use the .head() of the file
+        # Step 1.5: Show data preview
         st.subheader("Data Preview (first 5 rows):")
         st.dataframe(df.head())
-
-        # Remove leading and trailing spaces from all string values in the DataFrame
-        df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
-        # Store the processed DataFrame and other sheets in session state
-        st.session_state.df = df
-        st.session_state.other_sheets = other_sheets
-        st.session_state.step = 2 # Advance to the next step
-        st.rerun() # Rerun the app to display the next step's UI
+        
+        # Button to advance to the next step
+        if st.button("Next step"):
+            # This code only runs when the button is clicked
+            
+            # Remove leading and trailing spaces from all string values in the DataFrame
+            df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
+            # Store the processed DataFrame and other sheets in session state
+            st.session_state.df = df
+            st.session_state.other_sheets = other_sheets
+            st.session_state.step = 2 # Advance to the next step
+            st.rerun() # Rerun the app to display the next step's UI
 
 
 # Step 2: Analyze and Map Columns
