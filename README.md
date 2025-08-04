@@ -39,7 +39,7 @@ The application is structured into a series of steps, each focusing on a specifi
 * **Leave Unmodified:** Keep the column as is, without renaming.
 * **Delete Column:** Remove the column entirely from the dataset.
 
-**Required Columns:** The application checks for the presence of 'Project Short Name' and 'Case ID', which are mandatory for TCIA submissions. If 'Case ID' is missing, the user cannot proceed. If 'Project Short Name' is missing or contains invalid entries, the user will be prompted to provide a valid project short name.
+**Required Columns:** The application checks for the presence of 'Project Short Name' and 'Subject ID', which are mandatory for TCIA submissions. If 'Subject ID' is missing, the user cannot proceed. If 'Project Short Name' is missing or contains invalid entries, the user will be prompted to provide a valid project short name.
 
 ### 2.3. Categorical and Numeric Data Validation
 
