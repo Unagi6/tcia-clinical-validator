@@ -1,7 +1,7 @@
 # tcia-clinical-validator
  A streamlit validator to ensure Common Data Element compliance for submitting clinical data to TCIA.
 
-Link: https://tcia-clinical-validator-boyp2sjsdzdgawrqppupip.streamlit.app/ 
+Link: https://tcia-clinical-validator-nwlibxq25puscetkhvbotm.streamlit.app/ 
 
 # TCIA Clinical Data Validator: Application Documentation
 
@@ -111,6 +111,16 @@ At the top bar you may add any clinical file within the xlsx, csv, or tsv file f
 You may choose the Data Entry to fit the reading of the data but after uploading the documents you may be brought to this mapping column page:
 
 <img width="771" alt="Screenshot 2025-06-27 at 9 10 47 AM" src="https://github.com/user-attachments/assets/8456c3b8-5c19-4226-b123-afd760e33222" />
+
+**Note:** The dataset will sometimes come with headers unamed, currupted, or not right so two functions have been added for the user benefit to preview and fix their data.
+
+An Example of the preview data screenshot with the headers missing but appears as data values in "Row 0": 
+
+<img width="833" height="764" alt="Screenshot 2025-08-04 at 2 58 32 AM" src="https://github.com/user-attachments/assets/0942252d-aad2-4cfc-a3ab-5a93fb42d9ad" />
+
+An Example Screenshot of the fixed dataset after clicking "Header Fix?" button:
+
+<img width="866" height="898" alt="Screenshot 2025-07-31 at 9 03 53 PM" src="https://github.com/user-attachments/assets/e23fc257-fc90-4203-9f13-6996af778fce" />
 
 Each Column editing can be modified with the proper tools, each column presented to change has the same labels:
 
